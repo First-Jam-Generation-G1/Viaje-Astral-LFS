@@ -19,15 +19,6 @@ public class playerMove : MonoBehaviour
 
     private float x, y;
 
-    //Variables para el sonido de pasos del jugador
-    public AudioSource walk;
-    private bool HActive; //Verificación si soltó o no la tecla
-    private bool VActive; //Verificación si soltó o no la tecla
-
-    //Variable para sonido de salto del jugador
-    public AudioClip jumpSound; //Cuando salta
-    public AudioClip fallingSound; //Cuando Cae
-
     // Update is called once per frame
     void Update()
     {
@@ -44,6 +35,7 @@ public class playerMove : MonoBehaviour
         {
             animatior.SetBool("Other", false);
             animatior.Play("Fail");
+
         }
 
         if (x>0 || x<0 || y>0 || y < 0)
@@ -53,36 +45,10 @@ public class playerMove : MonoBehaviour
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (Input.GetKeyDown("space") && isGrounded)
-        {           
+        if (Input.GetKey("space") && isGrounded)
+        {
             animatior.Play("Jump");
             Invoke("Jump", 1/4);
-            walk.PlayOneShot(jumpSound);
-        }
-        else if (Input.GetKeyUp("space")){
-            walk.PlayOneShot(fallingSound);
-        }
-
-        //Validación (Oprimió o no las teclas -> Reproduce o no sonido)        
-        if(Input.GetButtonDown("Horizontal")){ //Si oprime la tecla, reproduzca sonido
-            HActive = true; //Valida que si esté presionada
-            walk.Play();
-        }
-        if(Input.GetButtonDown("Vertical")){ //Si oprime la tecla, reproduzca sonido
-            VActive = true; //Valida que si esté presionada
-            walk.Play();
-        }
-        if(Input.GetButtonUp("Horizontal")){ //Si no oprime la tecla, pause sonido
-            HActive = false; //Valida que no esté presionada
-            if(VActive == false){
-                walk.Pause();
-            }
-        }
-        if(Input.GetButtonUp("Vertical")){ //Si no oprime la tecla, pause sonido
-            VActive = false; //Valida que no esté presionada
-            if(HActive == false){
-                walk.Pause();
-            }
         }
     }
 
