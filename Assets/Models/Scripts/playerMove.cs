@@ -28,14 +28,18 @@ public class playerMove : MonoBehaviour
     public AudioClip jumpSound; //Cuando salta
     public AudioClip fallingSound; //Cuando Cae
 
+    public Vector2 turn;
+
     // Update is called once per frame
     void Update()
     {
         x = Input.GetAxis("Horizontal");
+        //x = Input.GetAxis("Mouse X");
         y = Input.GetAxis("Vertical");
 
-        transform.Rotate    (0, x * Time.deltaTime * rotationSpeed, 0);
+
         transform.Translate (0, 0, y * Time.deltaTime * runSpeed);
+        transform.Rotate    (0, x * Time.deltaTime * rotationSpeed, 0);
 
         animatior.SetFloat("VelX", x);
         animatior.SetFloat("VelY", y);
