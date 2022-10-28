@@ -12,7 +12,7 @@ public class efectSound : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
     
-    private void OnTriggerEnter2D(Collider2D c){
+    private void OnTriggerEnter(Collider c){
         if(c.CompareTag("Player")){
             audioSource.Play();
         }
