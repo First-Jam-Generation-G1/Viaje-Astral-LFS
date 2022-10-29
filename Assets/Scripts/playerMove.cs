@@ -97,7 +97,7 @@ public class playerMove : MonoBehaviour
         if (Input.GetKeyDown("space") && isGrounded)
         {
             animatior.Play("Jumping Up");
-            Invoke("Jump_", 1 / 2);
+            Invoke("Jump_", 1/5);
             walk.PlayOneShot(jumpSound);
         }
 
