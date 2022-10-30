@@ -8,7 +8,7 @@ public class EnemyMove : MonoBehaviour
     public LayerMask layerPlayer;
     public Transform player;
     public bool isAlert;
-    public float velocity = 0.05f;
+    public float velocity = 1f;
 
     public Animator animatior;
 
