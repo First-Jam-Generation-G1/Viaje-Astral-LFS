@@ -8,7 +8,10 @@ public class EnemyMove : MonoBehaviour
     public LayerMask layerPlayer;
     public Transform player;
     public bool isAlert;
-    public float velocity = 0.05f;
+    public bool touchPlayer;
+    public float velocity = 1f;
+
+    public Respawn respawn;
 
     public Animator animatior;
 
@@ -18,10 +21,24 @@ public class EnemyMove : MonoBehaviour
         animatior.Play("Floating");
         isAlert = Physics.CheckSphere(transform.position, sphereRadiusVision, layerPlayer);
 
+
+        touchPlayer = Physics.CheckSphere(transform.position, 0.5f, layerPlayer);
+
         if (isAlert)
         {
             transform.LookAt(player);
             transform.position = Vector3.MoveTowards(transform.position, player.position, velocity);
         }
+
+        if (touchPlayer)
+        {
+            respawn.isTaouch = true;
+        }
+    }
+
+    public void resetPosition()
+    {
+        transform.position = new Vector3(0, 2, 0);
+
     }
 }

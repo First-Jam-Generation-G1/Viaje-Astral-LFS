@@ -4,21 +4,6 @@ using UnityEngine;
 
 public class playerMove : MonoBehaviour
 {
-    public float runSpeed = 3;
-    public float rotationSpeed = 150;
-
-    public Animator animatior;
-    public Rigidbody rigidbody;
-
-    public float jumpHeight = 1.5f;
-    public float groundDistance = 0.1f;
-    public Transform groundCheck;
-    public LayerMask groundMask;
-
-    bool isGrounded;
-
-    private float x, y;
-
     //Variables para el sonido de pasos del jugador
     public AudioSource walk;
     private bool HActive; //Verificación si soltó o no la tecla
@@ -37,25 +22,8 @@ public class playerMove : MonoBehaviour
         Jump();
     }
 
-
-    public void Dead()
-    {
-        animatior.SetBool("Other", false);
-        animatior.Play("Fail");
-    }
     public void Walk()
     {
-        x = Input.GetAxis("Horizontal");
-        //x = Input.GetAxis("Mouse X");
-        y = Input.GetAxis("Vertical");
-
-
-        transform.Translate(0, 0, y * Time.deltaTime * runSpeed);
-        transform.Rotate(0, x * Time.deltaTime * rotationSpeed, 0);
-
-        animatior.SetFloat("VelX", x);
-        animatior.SetFloat("VelY", y);
-
         //Validación (Oprimió o no las teclas -> Reproduce o no sonido)        
         if (Input.GetButtonDown("Horizontal"))
         { //Si oprime la tecla, reproduzca sonido
@@ -86,31 +54,10 @@ public class playerMove : MonoBehaviour
     }
     public void Jump()
     {
-        // Determina si hay otros movimientos en curso
-        if (x > 0 || x < 0 || y > 0 || y < 0)
+        if (Input.GetKeyDown("space") )
         {
-            animatior.SetBool("Other", true);
-        }
-        //Determina si esta en el piso, todos los elementos que sean suelo deberan tener la mascara "Floor"
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        // Salto
-        if (Input.GetKeyDown("space") && isGrounded)
-        {
-            animatior.Play("Jumping Up");
-            Invoke("Jump_", 1/5);
             walk.PlayOneShot(jumpSound);
         }
-
-
-        else if (Input.GetKeyUp("space"))
-        {
-            walk.PlayOneShot(fallingSound);
-        }
-    }
-
-    public void Jump_()
-    {
-        rigidbody.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
     }
 
 }
