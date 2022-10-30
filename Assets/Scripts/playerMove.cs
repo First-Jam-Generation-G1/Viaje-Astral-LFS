@@ -9,17 +9,12 @@ public class playerMove : MonoBehaviour
     private bool HActive; //Verificación si soltó o no la tecla
     private bool VActive; //Verificación si soltó o no la tecla
 
-    //Variable para sonido de salto del jugador
-    public AudioClip jumpSound; //Cuando salta
-    public AudioClip fallingSound; //Cuando Cae
-
     public Vector2 turn;
 
     // Update is called once per frame
     void Update()
     {
         Walk();
-        Jump();
     }
 
     public void Walk()
@@ -52,12 +47,4 @@ public class playerMove : MonoBehaviour
             }
         }
     }
-    public void Jump()
-    {
-        if (Input.GetKeyDown("space") )
-        {
-            walk.PlayOneShot(jumpSound);
-        }
-    }
-
 }
