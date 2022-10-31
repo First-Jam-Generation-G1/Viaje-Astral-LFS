@@ -14,6 +14,10 @@ public class RespawnMove : MonoBehaviour
 
     public Vector3 respawnPosition;
 
+    private void Start()
+    {
+    }
+
     // Update is called once per frame
     void Update()
     {

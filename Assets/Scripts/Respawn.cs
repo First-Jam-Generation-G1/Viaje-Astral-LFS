@@ -37,7 +37,6 @@ public class Respawn : MonoBehaviour
         if ((isTaouch || isFail) && isRespawn == false)
         {
             Invoke("RespawnFunction", 1/2);
-            Debug.Log("isTouch: " + isTaouch + " isFail: " +isFail + " isRespawn: " + isRespawn);
         }
 
         if (isRespawn == true && newPlayer.transform.position == respawnMove.respawnPosition)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class OpenTrivia : MonoBehaviour
 {
     public GameObject triviaScreen;
@@ -33,6 +34,8 @@ public class OpenTrivia : MonoBehaviour
     public int currentQuestion;
 
 
+    public EnemyMove enemyMove;
+
     public int index;
 
     void Start()
@@ -53,7 +56,7 @@ public class OpenTrivia : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-
+            enemyMove.canMove = false;
             //instanc = other.gameObject;
             Open();
             //isActive = false;
@@ -83,6 +86,23 @@ public class OpenTrivia : MonoBehaviour
             TextOptionD.text = "por el clima";
             //Time.timeScale = 0;
         }
+        if (Input.GetKeyDown(KeyCode.A) && triviaIsOpen)
+        {
+            BadAnswer();
+        }
+        if (Input.GetKeyDown(KeyCode.B) && triviaIsOpen)
+        {
+            BadAnswer();
+        }
+        if (Input.GetKeyDown(KeyCode.C) && triviaIsOpen)
+        {
+            Correct();
+        }
+        if (Input.GetKeyDown(KeyCode.D) && triviaIsOpen)
+        {
+            BadAnswer();
+        }
+
 
     }
     public void Open()
@@ -130,6 +150,14 @@ public class OpenTrivia : MonoBehaviour
 
         //SetAnswers();
 
+
+    }
+    void Correct()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+    void BadAnswer()
+    {
 
     }
 
