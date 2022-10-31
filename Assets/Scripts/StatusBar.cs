@@ -8,7 +8,7 @@ public class StatusBar : MonoBehaviour
 
     public Image consciousnessBar;
 
-    public float currentConsciousness;
+    public float currentConsciousness = 0;
     public float maxConsciousness;
 
     // Update is called once per frame
