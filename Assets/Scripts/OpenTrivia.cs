@@ -80,7 +80,7 @@ public class OpenTrivia : MonoBehaviour
             //TextOptionA.text = answer[1];
             TextOptionA.text = "a la vivora vivora de la mar";
             TextOptionB.text = "el silencio";
-            TextOptionD.text = "por las marmotas";
+            TextOptionD.text = "por el clima";
             //Time.timeScale = 0;
         }
 
