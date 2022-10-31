@@ -6,27 +6,11 @@ public class DestructionBox : MonoBehaviour
 {
     public GameObject instanc;
     public bool isActive = true;
+    public bool isTouch = false;
+    public LayerMask playerLayer;
     // public bool isRespawn = false;
     // public Vector3 lastposition;
     // Start is called before the first frame update
-    private void OnTriggerStay(Collider other)
-    {
-
-        if (other.tag == "Destruction")
-        {
-
-            instanc = other.gameObject;
-            instanc.SetActive(false);
-            isActive = false;
-
-
-
-
-
-
-        }
-    }
-
 
     void Update()
     {
@@ -36,6 +20,12 @@ public class DestructionBox : MonoBehaviour
             //StartCoroutine(ImACoroutine());
             StartCoroutine(TimeDelay());
             ReturnBox();
+        }
+        isTouch = Physics.CheckSphere(transform.position, 1, playerLayer);
+        if (isTouch)
+        {
+            gameObject.SetActive(false);
+            isTouch = false;
         }
     }
     public void ReturnBox()

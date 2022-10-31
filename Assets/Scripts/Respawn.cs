@@ -29,34 +29,23 @@ public class Respawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isFail = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (isRespawn == false)
+        {
+            isFail = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        }
+
         if ((isTaouch || isFail) && isRespawn == false)
         {
-            Input.GetKeyDown(KeyCode.Space);
-
-            retroceso_AS.Play();
-
-            isRespawn = true;
-            lastposition = player.transform.position;
-            lastRotation = player.transform.rotation;
-
-            player.SetActive(false);
-            cam.SetActive(false);
-            
-            camAux.SetActive(true);
-            newPlayer.SetActive(true);
-
-            newPlayer.transform.position = lastposition;
-            newPlayer.transform.rotation = lastRotation;
-
-            respawnMove.Jump();
-            respawnMove.velocity += 0.01f;
-            enemy.resetPosition();
-
+            Invoke("RespawnFunction", 1/2);
+            Debug.Log("isTouch: " + isTaouch + " isFail: " +isFail + " isRespawn: " + isRespawn);
         }
 
         if (isRespawn == true && newPlayer.transform.position == respawnMove.origin.position)
         {
+            Input.GetKeyDown(KeyCode.LeftShift);
+            isRespawn = false;
+            isTaouch = false;
+
             newPlayer.SetActive(false);
             camAux.SetActive(false);
             retroceso_AS.Stop();
@@ -65,15 +54,32 @@ public class Respawn : MonoBehaviour
             cam.SetActive(true);
             player.SetActive(true);
             player.transform.position = respawnMove.origin.position;
-            Input.GetKeyDown(KeyCode.Space);
 
             lastposition = respawnMove.origin.position;
             lastRotation = respawnMove.origin.rotation;
-
-            isRespawn = false;
-            isTaouch = false;
         }
 
     }
 
+    void RespawnFunction()
+    {
+        retroceso_AS.Play();
+
+        isRespawn = true;
+        lastposition = player.transform.position;
+        lastRotation = player.transform.rotation;
+
+        player.SetActive(false);
+        cam.SetActive(false);
+
+        camAux.SetActive(true);
+        newPlayer.SetActive(true);
+
+        newPlayer.transform.position = lastposition;
+        newPlayer.transform.rotation = lastRotation;
+
+        respawnMove.Jump();
+        respawnMove.velocity += 0.01f;
+        enemy.resetPosition();
+    }
 }

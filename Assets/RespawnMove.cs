@@ -6,7 +6,7 @@ public class RespawnMove : MonoBehaviour
 {
     public Transform origin;
     public Rigidbody rigidBody;
-    public float velocity = 0.5f;
+    public float velocity = 0.1f;
     public LayerMask layerPlayer;
 
     public Animator animatior;
