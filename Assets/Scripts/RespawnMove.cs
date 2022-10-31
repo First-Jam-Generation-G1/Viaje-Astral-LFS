@@ -12,11 +12,17 @@ public class RespawnMove : MonoBehaviour
     public Animator animatior;
     public bool isAlert;
 
+    public Vector3 respawnPosition;
+
+    private void Start()
+    {
+    }
+
     // Update is called once per frame
     void Update()
     {
         isAlert = Physics.CheckSphere(transform.position, 1, layerPlayer);
-        transform.position = Vector3.MoveTowards(transform.position, origin.position, velocity);
+        transform.position = Vector3.MoveTowards(transform.position, respawnPosition, velocity);
     }
 
     public void Jump()

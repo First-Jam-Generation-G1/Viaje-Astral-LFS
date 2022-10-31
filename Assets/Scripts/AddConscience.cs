@@ -10,6 +10,7 @@ public class AddConscience : MonoBehaviour
     public LayerMask layerPlayer;
     public StatusBar statusBar;
     public float consciousnessLevel;
+    public RespawnMove respawnMove;
 
     // Update is called once per frame
     void Update()
@@ -18,6 +19,7 @@ public class AddConscience : MonoBehaviour
         if (isTouch)
         {
             statusBar.currentConsciousness = consciousnessLevel;
+            respawnMove.respawnPosition = transform.position;
         }
     }
 }

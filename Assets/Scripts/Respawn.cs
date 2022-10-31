@@ -37,10 +37,9 @@ public class Respawn : MonoBehaviour
         if ((isTaouch || isFail) && isRespawn == false)
         {
             Invoke("RespawnFunction", 1/2);
-            Debug.Log("isTouch: " + isTaouch + " isFail: " +isFail + " isRespawn: " + isRespawn);
         }
 
-        if (isRespawn == true && newPlayer.transform.position == respawnMove.origin.position)
+        if (isRespawn == true && newPlayer.transform.position == respawnMove.respawnPosition)
         {
             Input.GetKeyDown(KeyCode.LeftShift);
             isRespawn = false;
@@ -53,9 +52,9 @@ public class Respawn : MonoBehaviour
 
             cam.SetActive(true);
             player.SetActive(true);
-            player.transform.position = respawnMove.origin.position;
+            player.transform.position = respawnMove.respawnPosition;
 
-            lastposition = respawnMove.origin.position;
+            lastposition = respawnMove.respawnPosition;
             lastRotation = respawnMove.origin.rotation;
         }
 
@@ -79,7 +78,6 @@ public class Respawn : MonoBehaviour
         newPlayer.transform.rotation = lastRotation;
 
         respawnMove.Jump();
-        respawnMove.velocity += 0.01f;
         enemy.resetPosition();
     }
 }

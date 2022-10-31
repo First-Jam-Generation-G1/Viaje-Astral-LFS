@@ -15,6 +15,10 @@ public class EnemyMove : MonoBehaviour
 
     public Animator animatior;
 
+    public PauseMenu pauseMenu;
+    public bool canMove = true;
+
+
     // Update is called once per frame
     void Update()
     {
@@ -24,7 +28,7 @@ public class EnemyMove : MonoBehaviour
 
         touchPlayer = Physics.CheckSphere(transform.position, 0.5f, layerPlayer);
 
-        if (isAlert)
+        if (isAlert && pauseMenu.isPaused == false && canMove)
         {
             transform.LookAt(player);
             transform.position = Vector3.MoveTowards(transform.position, player.position, velocity);
@@ -34,6 +38,8 @@ public class EnemyMove : MonoBehaviour
         {
             respawn.isTaouch = true;
         }
+
+
     }
 
     public void resetPosition()
